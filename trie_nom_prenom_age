@@ -1,0 +1,78 @@
+#include<iostream>
+#include<vector>
+#include<list>
+#include <algorithm>
+
+
+using namespace std;
+
+class Etudiant {
+    public:
+        string nom;
+        string prenom;
+        float age;
+        Etudiant(){}
+        Etudiant(string nom , string prenom , int age){
+            this->nom = nom;
+            this->prenom = prenom;
+            this->age = age;
+        }   
+};
+
+class listeEtudiant {
+    public : 
+    vector<Etudiant> E;
+    void display(){
+         vector<Etudiant>::iterator itr;
+         for(itr = this->E.begin() ; itr!=this->E.end() ; ++itr){
+              cout<<" "<<itr->nom<<" "<<itr->prenom<<" "<<itr->age<<endl;
+         }
+    } 
+};
+
+
+listeEtudiant tri_bulle(listeEtudiant T)
+{
+    int passage = 0;
+    bool permutation = true;
+    int en_cours;
+ 
+    
+    while (permutation) {
+        permutation = false;
+        passage ++;
+        for (en_cours=0;en_cours<T.E.size()-passage;en_cours++) {
+            if (T.E[en_cours].age>T.E[en_cours+1].age){
+                permutation = true;
+                // on echange les deux elements
+                Etudiant  temp = T.E[en_cours];
+                T.E[en_cours] = T.E[en_cours+1];
+                T.E[en_cours+1] = temp;
+            }
+        }
+    }
+    return T;
+}
+
+int main(){
+    
+     listeEtudiant listeE;
+     Etudiant E1 = Etudiant("ffrfazd","hudeded",7454);
+     Etudiant E2 = Etudiant("ujuazd","g-dg-eded",28554);
+     Etudiant E3 = Etudiant("amppzd","jujudeded",854);
+     Etudiant E4 = Etudiant("zsdazd","f-deded",7454);
+
+      listeE.E.push_back(E1);
+      listeE.E.push_back(E2);
+      listeE.E.push_back(E3);
+      listeE.E.push_back(E4);
+     
+             listeE.display();
+listeEtudiant v = tri_bulle(listeE);
+cout<<"---------------------------------------"<<endl;
+              v.display();
+
+
+   return 0;
+};
+
